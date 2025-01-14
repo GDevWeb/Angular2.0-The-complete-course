@@ -1,0 +1,14 @@
+<app-header
+  subtitle="Enterprise-level task management without friction"
+  bgColor="#3b3b3b"
+></app-header>
+
+<div class="container">
+  <app-sidebar
+    [links]="['Home', 'About', 'Contact']"
+    (linkSelected)="onLinkSelected($event)"
+  />
+  <main>
+    <router-outlet></router-outlet>
+  </main>
+</div>

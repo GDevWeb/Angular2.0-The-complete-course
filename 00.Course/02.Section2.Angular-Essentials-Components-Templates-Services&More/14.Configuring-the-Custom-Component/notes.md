@@ -1,36 +1,65 @@
-# Section 2 : Angular essentials components, templates, services & more
+# Section 2 : Angular Essentials - Components, Templates, Services & More
 
-## 14. Configuring the Custom Component
+## **Chapter 14: Configuring the Custom Component**
 
-- [Udemy](https://www.udemy.com/course/the-complete-guide-to-angular-2/learn/lecture/43788468#overview)
-
-- **Purpose**: Learn how to configure a manually created Angular component and integrate it with an application.
+- [udemy](https://www.udemy.com/course/the-complete-guide-to-angular-2/learn/lecture/43788468#overview)
 
 ---
 
-### Steps to Configure the Custom Component
+#### **Objective**:
 
-1. **Update the Component Logic** (`header.component.ts`):
+Learn to configure your custom component by passing data into it via `@Input()` properties and enhancing its dynamic capabilities.
 
-   - Open the `header.component.ts` file and add or modify the properties to be used in the component:
+---
+
+#### **Key Concepts**:
+
+1. **`@Input()` Decorator**:
+
+   - Used to pass data from a parent component to a child component.
+   - Allows the parent to control the child component's behavior or content dynamically.
+
+   Example:
+
+   ```typescript
+   import { Component, Input } from "@angular/core";
+
+   @Component({
+     selector: "app-header",
+     templateUrl: "./header.component.html",
+   })
+   export class HeaderComponent {
+     @Input() subtitle: string = "Default Subtitle";
+   }
+   ```
+
+   - The `subtitle` property will now accept values passed by the parent component.
+
+---
+
+#### **Step-by-Step Guide**:
+
+1. **Update the HeaderComponent**:
+
+   - Open `header.component.ts` and add an `@Input()` property for `subtitle`:
 
      ```typescript
-     import { Component } from "@angular/core";
+     import { Component, Input } from "@angular/core";
 
      @Component({
-       selector: "app-header", // Component selector for use in templates
+       selector: "app-header",
        templateUrl: "./header.component.html",
        styleUrls: ["./header.component.css"],
      })
      export class HeaderComponent {
-       title: string = "Welcome to My Angular App";
-       subtitle: string = "Building with Angular is fun!";
+       @Input() subtitle: string = "Manage your tasks effortlessly";
+       title: string = "EasyTask";
      }
      ```
 
-2. **Update the Component Template** (`header.component.html`):
+2. **Update the Template**:
 
-   - Use the component's class properties to dynamically display data in the template using Angular's **string interpolation**:
+   - Modify `header.component.html` to display the subtitle:
      ```html
      <header>
        <h1>{{ title }}</h1>
@@ -38,64 +67,57 @@
      </header>
      ```
 
-3. **Add Styles to the Component** (`header.component.css`):
+3. **Pass Data from the Parent Component**:
 
-   - Style the header for better presentation:
+   - Open `app.component.html` and pass a value for the `subtitle` input:
+
+     ```html
+     <app-header
+       subtitle="Enterprise-level task management without friction"
+     ></app-header>
+     <router-outlet></router-outlet>
+     ```
+
+   - The `subtitle` will now display dynamically in the header component.
+
+4. **Optional: Add More Inputs**:
+
+   - Add another input for customizing the background color:
+
+     ```typescript
+     @Input() bgColor: string = '#6200ea';
+     ```
+
+   - Update `header.component.css`:
 
      ```css
      header {
-       background-color: #f4f4f9;
-       padding: 1.5rem;
+       background-color: {{ bgColor }};
+       color: white;
+       padding: 1rem;
        text-align: center;
-       border-bottom: 2px solid #ddd;
-     }
-
-     h1 {
-       margin: 0;
-       font-size: 2rem;
-       color: #333;
-     }
-
-     h2 {
-       margin: 0;
-       font-size: 1.2rem;
-       color: #555;
      }
      ```
 
-4. **Register the Component** in the App Module (`app.module.ts`):
-
-   - Ensure the new component is declared in the `AppModule` to be used in the application:
-
-     ```typescript
-     import { HeaderComponent } from "./header/header.component";
-
-     @NgModule({
-       declarations: [
-         AppComponent,
-         HeaderComponent, // Add your HeaderComponent here
-       ],
-       imports: [BrowserModule],
-       providers: [],
-       bootstrap: [AppComponent],
-     })
-     export class AppModule {}
-     ```
-
-5. **Use the Component in the Main Template** (`app.component.html`):
-   - Include the component using its selector (`app-header`) in the parent template:
+   - Pass the `bgColor` from the parent component:
      ```html
-     <app-header></app-header>
+     <app-header
+       subtitle="Manage tasks with ease"
+       bgColor="#3b3b3b"
+     ></app-header>
      ```
 
 ---
 
-### Key Takeaways:
+#### **Hands-On Practice**:
 
-- Components can dynamically display data using class properties and Angular’s interpolation syntax.
-- Always register new components in the `AppModule` for proper integration.
-- Separation of concerns (HTML, CSS, and TypeScript files) helps maintain a clean and organized project structure.
+1. Configure the **HeaderComponent** to:
+
+   - Accept a dynamic subtitle.
+   - Optionally accept a background color for styling.
+
+2. Verify that the changes dynamically update the header component.
 
 ---
 
-Let me know if you're ready to move to Chapter 15!
+Once you’ve completed this, let me know, and we’ll move on to **Chapter 15: Using the Custom Component**! 😊

@@ -1,82 +1,97 @@
-# Section 2 : Angular essentials components, templates, services & more
+# Section 2 : Angular Essentials - Components, Templates, Services & More
 
-## 15. Using the Custom Component
+## **Chapter 15: Using the Custom Component**
 
-- [Udemy](https://www.udemy.com/course/the-complete-guide-to-angular-2/learn/lecture/43788472#overview)
-
-- **Purpose**: Understand how to reuse and integrate your custom components in different parts of an Angular application.
+- [udemy](https://www.udemy.com/course/the-complete-guide-to-angular-2/learn/lecture/43788472#overview)
 
 ---
 
-### Steps to Use a Custom Component
+### **Objective**:
 
-1. **Include the Component in a Template**:
+Learn how to integrate and reuse your custom component in different parts of your Angular application.
 
-   - Use the custom component's **selector** (`app-header`) wherever you want it to appear.
-   - For example, in `app.component.html`:
+---
+
+#### **Key Concepts**:
+
+1. **Reusability of Components**:
+
+   - Angular components can be reused in multiple places by using their selectors.
+   - This reduces duplication and improves maintainability.
+
+2. **Dynamic Inputs**:
+
+   - Inputs allow you to make the component adaptable by passing different data each time it's used.
+
+3. **Encapsulation**:
+   - Each component operates independently with its own template, styles, and logic.
+
+---
+
+#### **Step-by-Step Guide**:
+
+1. **Use the Header Component**:
+
+   - Open `app.component.html` and integrate the `HeaderComponent`:
      ```html
-     <app-header></app-header>
-     <div>
-       <p>Welcome to the main content of the app!</p>
+     <app-header subtitle="Welcome to EasyTask" bgColor="#3b3b3b"></app-header>
+     ```
+
+2. **Reuse the Header Component Elsewhere**:
+
+   - You can include the `HeaderComponent` in other components. For example:
+     - Generate a new component:
+       ```bash
+       ng generate component components/dashboard
+       ```
+     - Use the `HeaderComponent` in `dashboard.component.html`:
+       ```html
+       <app-header subtitle="Dashboard Overview" bgColor="#6200ea"></app-header>
+       ```
+
+3. **Customize Each Usage**:
+
+   - Each instance of `HeaderComponent` can have different `subtitle` and `bgColor` values, making it reusable in various parts of the app.
+
+4. **Refactor App Layout**:
+   - Create placeholders for other components:
+     ```html
+     <app-header subtitle="Manage Your Tasks"></app-header>
+     <div class="main-content">
+       <router-outlet></router-outlet>
      </div>
      ```
 
-2. **Reuse the Component**:
+---
 
-   - Components can be reused multiple times within the same or different templates:
-     ```html
-     <app-header></app-header>
-     <div>
-       <p>This is the content section 1.</p>
-     </div>
-     <app-header></app-header>
-     <div>
-       <p>This is the content section 2.</p>
-     </div>
-     ```
+#### **Modern Angular Practices**:
 
-3. **Pass Data Between Components** (Optional):
+1. **Keep Components Modular**:
 
-   - Components can communicate with each other using **inputs** and **outputs**.
-   - Update the `header.component.ts` to accept an input property:
+   - Avoid embedding unrelated logic in the `HeaderComponent`. Keep it focused on rendering the header.
 
+2. **Use Strong Typing**:
+
+   - Ensure `@Input()` properties have explicit types. For example:
      ```typescript
-     import { Component, Input } from "@angular/core";
-
-     @Component({
-       selector: "app-header",
-       templateUrl: "./header.component.html",
-       styleUrls: ["./header.component.css"],
-     })
-     export class HeaderComponent {
-       @Input() title: string = "Default Title";
-       @Input() subtitle: string = "Default Subtitle";
-     }
+     @Input() subtitle: string = '';
+     @Input() bgColor: string = '#ffffff';
      ```
 
-   - Use the component and pass data to it:
-     ```html
-     <app-header
-       [title]="'Dynamic Title'"
-       [subtitle]="'Dynamic Subtitle'"
-     ></app-header>
-     ```
-
-4. **Test the Application**:
-   - Serve the application using:
-     ```bash
-     ng serve
-     ```
-   - Open `http://localhost:4200` in your browser to verify the output.
+3. **Encapsulation**:
+   - Encapsulate styles using Angular’s default `ViewEncapsulation` to avoid conflicts with other components.
 
 ---
 
-### Key Takeaways:
+#### **Hands-On Practice**:
 
-- Components are reusable by using their selector tags in templates.
-- You can pass data dynamically using Angular’s **@Input** properties.
-- Components help in creating modular, maintainable, and scalable applications.
+1. Use the **HeaderComponent** in at least two places in your app:
+
+   - The `AppComponent` (main entry).
+   - A new `DashboardComponent`.
+
+2. Pass different `subtitle` and `bgColor` inputs for each usage.
 
 ---
 
-Let me know if you’re ready to proceed to Chapter 16!
+Once you're done with this, let me know, and we’ll move on to **Chapter 16: Styling the Header Component & Adding an Image**! 😊

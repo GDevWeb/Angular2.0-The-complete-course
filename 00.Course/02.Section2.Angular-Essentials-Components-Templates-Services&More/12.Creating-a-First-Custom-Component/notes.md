@@ -1,106 +1,88 @@
-# Section 2 : Angular essentials components, templates, services & more
+# **Chapter 12: Creating a First Custom Component**
 
-## 12. Creating a First Custom Component
+## **What Is a Custom Component?**
 
-- [Udemy](https://www.udemy.com/course/the-complete-guide-to-angular-2/learn/lecture/43788462#overview)
+- [udemy](https://www.udemy.com/course/the-complete-guide-to-angular-2/learn/lecture/43788462#overview)
 
 ---
 
-- **Purpose**: Understand how to manually create a component to gain insight into Angular's inner workings.
+- A custom component is one that you define to break your application into smaller, reusable parts.
+- It encapsulates a specific piece of functionality or a UI section.
 
-#### **Steps to Create a Header Component**:
+---
 
-1. **Manually Create the Files**:
+## **Steps to Create a Custom Component**
 
-   - Inside the `src/app` directory, create a new folder named `header`.
-   - Inside the `header` folder, manually create the following files:
-     - `header.component.ts`: For the component logic.
-     - `header.component.html`: For the component’s template.
-     - `header.component.css` (or `.scss`): For the component’s styles.
+1. **Generate the Component**:
+   Use the Angular CLI to create a new component:
 
-2. **Add Component Logic** (`header.component.ts`):
+   ```bash
+   ng generate component components/header
+   ```
 
-   - Define the component using the `@Component` decorator:
+   - This creates four files: `.component.ts`, `.component.html`, `.component.css` (or `.scss`), and `.component.spec.ts`.
+   - The component is automatically declared in `AppModule`.
+
+2. **Edit the Component**:
+
+   - Open the newly created `header.component.ts` and add the logic for your header.
+   - Example:
 
      ```typescript
      import { Component } from "@angular/core";
 
      @Component({
-       selector: "app-header", // The component's selector for use in templates.
-       templateUrl: "./header.component.html", // Path to the template file.
-       styleUrls: ["./header.component.css"], // Path to the styles file.
+       selector: "app-header",
+       templateUrl: "./header.component.html",
+       styleUrls: ["./header.component.css"],
      })
      export class HeaderComponent {
-       title: string = "Welcome to My Angular App";
+       title = "EasyTask";
      }
      ```
 
-3. **Create the Template** (`header.component.html`):
+3. **Update the Template**:
 
-   - Add some basic HTML:
+   - Open `header.component.html` and define the layout:
      ```html
      <header>
        <h1>{{ title }}</h1>
      </header>
      ```
 
-4. **Style the Component** (`header.component.css`):
+4. **Style the Component**:
 
-   - Add some simple CSS for the header:
-
+   - Open `header.component.css` and add styling:
      ```css
      header {
-       background-color: #f8f9fa;
+       background-color: #6200ea;
+       color: white;
        padding: 1rem;
        text-align: center;
      }
-
-     h1 {
-       margin: 0;
-       color: #333;
-     }
      ```
 
-5. **Register the Component**:
-
-   - Open the `app.module.ts` file and add the new component to the `declarations` array:
-
-     ```typescript
-     import { HeaderComponent } from "./header/header.component";
-
-     @NgModule({
-       declarations: [
-         AppComponent,
-         HeaderComponent, // Add the HeaderComponent here.
-       ],
-       imports: [BrowserModule],
-       providers: [],
-       bootstrap: [AppComponent],
-     })
-     export class AppModule {}
-     ```
-
-6. **Use the Component in the App Template**:
-
-   - Open `app.component.html` and add the `app-header` selector:
+5. **Include the Component in AppComponent**:
+   - Open `app.component.html` and add the selector for the `HeaderComponent`:
      ```html
-     <app-header></app-header>
+     <app-header></app-header> <router-outlet></router-outlet>
      ```
-
-7. **Serve the Application**:
-   - Run the development server:
-     ```bash
-     ng serve
-     ```
-   - Check the application at `http://localhost:4200` to see your new header!
 
 ---
 
-### **Key Takeaways**:
+#### **Modern Angular Practices**
 
-- Manually creating components helps understand how Angular ties together templates, logic, and styles.
-- Always register custom components in the `AppModule` to make them available in your application.
+- Use **TypeScript** for strongly-typed properties (e.g., `title: string = 'EasyTask';`).
+- Encapsulate styles within components using Angular’s ViewEncapsulation mechanism (default).
 
 ---
 
-Let me know how this matches your current progress or if you'd like further refinements!
+#### **Hands-On Practice**
+
+1. Generate the `HeaderComponent` as described.
+2. Display a title (`EasyTask`) in the header.
+3. Add basic styles to match the look of the EasyTask project.
+
+---
+
+Once you complete these steps, we’ll move to the next chapter to **configure and extend the header component**. Let me know if you need clarification or additional guidance!
